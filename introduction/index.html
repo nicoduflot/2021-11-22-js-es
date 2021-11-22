@@ -101,7 +101,51 @@
          * 
         */
 
+        let calculPow1 = Math.pow(2, 3);
+        console.log(calculPow1);
+        let calculPow2 = 2**3;
+        console.log(calculPow2);
 
+
+        /**
+         * 
+         * // 
+         * 
+         * String a = "Chaîne";
+         * a.equal("Chaîne"); // true
+         * 
+         * String b = null;
+         * b.equal("Chaîne"); // NulPointerException
+         * 
+         * // yoda code
+         * "Chaîne".equal(b); // false
+         * 
+        */
+
+        let chaineQuote = 'Lorem, ipsum dolor sit amet consectetur';
+        chaineQuote += ' adipisicing elit. Possimus enim ducimus ';
+        chaineQuote += 'laudantium consectetur a totam id. Enim consectetur ';
+        chaineQuote += 'sequi, corrupti aliquid, quam quidem dolorum excepturi, ';
+        chaineQuote += 'tempora soluta rem quis saepe?';
+        console.log(chaineQuote);
+
+        let chaineBackQuote = `Lorem ipsum dolor sit amet consectetur 
+adipisicing elit. Autem architecto porro, 
+nostrum, impedit debitis possimus accusamus 
+recusandae vitae illo obcaecati dolorum? Facilis 
+vero, corporis nam cum molestiae consequuntur 
+doloribus sequi!`;
+
+        console.log(chaineBackQuote);
+
+        function renvoiUnMot(unMot = 'Coucou'){
+            return unMot;
+        }
+
+        // Interpolation de chaîne
+        let a = 1;
+        let template = `a ${a}, 1 +2 = ${1 + 2}, renvoiUnMot() : ${renvoiUnMot()}, renvoiUnMot('Test') : ${renvoiUnMot('test')}`;
+        console.log(template);
 
     </script>
 </head>
