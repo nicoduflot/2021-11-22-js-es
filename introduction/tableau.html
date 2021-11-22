@@ -247,9 +247,26 @@
         console.log( Math.floor(Math.random()*5) + 1 );
 
         // remplir le tableau
-
+        let nombres = [];
+        for(let i = 0; i < 10; i++){
+            nombres[i] = ( Math.floor( Math.random() * 100 + 1 ) );
+        }
 
         // trier le tableau
+        console.log(`${nombres}`);
+        for(let i = 0; i < nombres.length; i++){
+            for(let j = i+1; j < nombres.length; j++){
+                if(nombres[i] < nombres[j]){
+                    let tampon = nombres[i];
+                    nombres[i] = nombres[j];
+                    nombres[j] = tampon;
+                }
+            }
+        }
+
+        console.log(`${nombres}`);
+
+
 
     </script>
 </head>
