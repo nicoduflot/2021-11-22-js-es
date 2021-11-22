@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        // script js en page
+        /*
+        Commentairtes en bloc
+        */
+        // variables : déclaration
+        var prenom  = 'Jean';
+        let nom     = 'Durand';
+
+        function affichePrenom(){
+            console.log(prenom);
+            prenom = 'Urbain';
+        }
+
+        affichePrenom();
+        console.log(prenom);
+
+        function afficheNom(){
+            let nom = 'Tim'
+            console.log(nom);
+            nom = 'Urbain';
+        }
+
+        afficheNom();
+        console.log(nom);
+
+        // transtype => concaténation texte + nombre => la variable devient texte
+        console.log(1 + 2);
+        console.log(nom + 2.3 + 3);
+        console.log(`${nom} ${2.3 + 3}`);
+
+        /*
+        JS est un langage protoypé
+        */
+
+        // constante = une variable dont le contenu ne doit jamais changer, évoluer.
+        const CAFE = 'Arabica';
+
+        // JS est un langage non typé
+        /**
+         * Types
+         * [Primitif]
+         * number       => nombre (entier, flottant)
+         * bool         => Booléen
+         * 
+         * [Référence]
+         * String       => chaîne de caractère 
+         * Array        => tableau de données
+         * Object       => objet
+         * JSON         => JavaScript Object Notation
+         * 
+        */
+
+        // Opérateurs
+        /**
+         * 
+         * Mathématiques :
+         * 
+         *  + (sers aussi à la concaténation des chaîne de caractères)
+         *  - 
+         *  /
+         *  % 
+         *  *
+         *  ** ( remplace Math.pow())
+         *  Math.pow(2, 3)
+         *  2**3
+         *
+         *  Incrémentation / Décrémentation
+         *  var++ ++var
+         *  var-- --var
+         *  
+         * 
+         *  Logiques
+         *  && (ET)
+         *  || (OU)
+         *  ! (NON)
+         *  ^ (XOR OU exclusif binaire)
+         * 
+         *  a ^ b   => si a et !b   => true
+         *          => si !a et b   => true
+         *          => si !a et !b  => false
+         *          => si a et b    => false
+         * 
+         * Comparaison
+         * 
+         * < > <= >=
+         * == !=        =>  Comparatif valeur               ('2' == 2)  => true
+         * === !==      =>  Comparatif valeur et de type    ('2' == 2)  => false
+         *                                                  (2 == 2)    => true
+         * 
+        */
+
+
+
+    </script>
+</head>
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Javascript Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="../introduction/index.html">Variables & Opérateurs</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/tableau.html">Les tableaux</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/fonction.html">Les fonction</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/storage.html">Variables & Opérateurs</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>Variables & Opérateurs</h2>
+                </header>
+                <main>
+                    <h3>Ecmascript</h3>
+                    <p>
+                        Ecmascript (es) est une norme sur laquelle s'appuie JS. (ActiaonScript => flash, TypeScript).
+                    </p>
+                    <p>
+                        La dernière norme ecmascript es7 (2017, très peu de différences avec es6)
+                    </p>
+                    <ul>
+                        <li>es1 - 1997</li>
+                        <li>es2 - 1999</li>
+                        <li>es4 - version abonadonnée</li>
+                        <li>es5 - 2009</li>
+                        <li>es6 - 2015</li>
+                        <li>es7 - 2017</li>
+                    </ul>
+                    <p>
+                        Jusqu'en 2010, JS était mal considéré par les développeurs ( peu normé, trop permissif )
+                    </p>
+                    <p>
+                        L'arrivée de Google Chrome, avec en plus l'envie de Google de refaire fonctionner correctement JS.
+                        Création du moteur d'interprétation V8.
+                        => un boost des capacitées de JS et sont éxécution
+                    </p>
+                    <p>
+                        Grâce au V8, des nouveau langages ou méthode de développement sont arrivées, notemment NodeJs (2009), 
+                        qui s'appuis sur JS mais s'éxécute sur le serveur
+                    </p>
+                    <p>
+                        La convention du code en es6 est visible sur Github 
+                        <a href="https://github.com/elierotenberg/coding-styles/blob/master/es6.md" 
+                        target="_blank">
+                            es6
+                        </a>
+                    </p>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
