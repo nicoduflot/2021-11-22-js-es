@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        // avant es6 
+        // var tableau = new Array('valeur', 1, 1.2, true);
+        // depuis es6
+        let cars = ['Peugeot', 'Citröen', 'Ford', 'Renault'];
+        console.log(cars);
+        console.table(cars);
+        console.log(cars[1]);
+        console.log(`Le tableau cars : ${cars} contien ${cars.length}`);
+
+        // les tableau sont l'équivalent d'objets Itérables
+
+        console.log('-------- boucle for -----------');
+        for(let i = 0; i < cars.length; i++){
+            console.log(`la valeur à l'index ${i} est ${cars[i]}`);
+        }
+
+        console.log('-------- boucle for in -----------');
+        for(let index in cars){
+            console.log(`la valeur à l'index ${index} est ${cars[index]}`);
+        }
+
+        // le for in peut servir a "capter" les attributs et les méthode d'un objet
+        let obj = {
+            nom: 'Duflot',
+            prenom: 'Nicolas',
+            presentation: function(){
+                return `Je m'appelle ${this.nom}`;
+            }
+        };
+
+        console.log(obj);
+
+        for(let key in obj){
+            if(Object.hasOwnProperty.call(obj, key)){
+                let element = obj[key];
+                console.log(element);
+            }
+        }
+
+        console.log('-------- boucle for of (es6) -----------');
+        for(let value of cars){
+            console.log(`la valeur actuelle dans cars est ${value}`);
+        }
+
+        console.log('-------- boucle do while -----------');
+        let cpt = 0;
+        do{
+            console.log(cars[cpt]);
+            cpt++;
+        }while( cpt < cars.length)
+
+        console.log('-------- boucle while -----------');
+        cpt = 0;
+        while( cpt < cars.length){
+            console.log(cars[cpt]);
+            cpt++;
+        }
+
+        // forEach
+        console.log('-------- forEach -----------');
+        cars.forEach( function(element, index, tab){
+            console.log(element);
+            console.log(index);
+            console.log(tab);
+        });
+
+        // es6 .entries()
+        /*
+        Vient du modèle objet. permet d'extraire les clefs et les valeurs 
+        d'un tableau sous forme de tableau pour chaque élément du tableau parcouru
+        */
+        console.log('-------- méthode .entries() -----------');
+        for(let entry of cars.entries()){
+            console.log(entry);
+            console.log(entry[0]);
+            console.log(entry[1]);
+        }
+
+        //ajout délément
+        cars[cars.length] = 'Hyundai';
+        /*
+        cars[8] = 'Papamobile';
+        console.log(cars);
+        */
+        
+        cars.push('Seat');
+        cars.push('Fiat', 'Toyota'); 
+
+        console.log(cars);
+        // supprimer des valeurs dans un tableau
+        // .pop(), .shift(), .splice()
+
+        // .pop() => extrait la dernière valeur du tableau
+        let extractLast = cars.pop();
+        console.log(cars);
+        console.log(extractLast);
+
+        // .shift() => extrait la première valeur du tableau et réarrange les index
+        let extractFirst = cars.shift();
+        console.log(cars);
+        console.log(extractFirst);
+
+        // splice() 1 : extraire des valeurs dans le tableau (retourne un tableau)
+        let removed = cars.splice(cars.indexOf('Ford'), 2);
+        console.log(cars);
+        console.log(removed);
+
+        // splice() 2 : remplacer des valeurs dans le tableau (retourne un tableau)
+        let replaced = cars.splice(cars.indexOf('Citröen'), 2, 'Alpine', 'Mazda');
+        console.log(cars);
+        console.log(replaced);
+
+        // splice() 3 : inserrer des valeurs dans le tableau
+        cars.splice(cars.indexOf('Mazda'), 0, removed[0], removed[1], replaced[0], replaced[1], extractFirst, extractLast);
+        console.log(cars);
+
+        // faire une copie d'un tableau
+        /*
+        let carsClone = cars;
+        */
+
+        // .slice();
+        let carsClone = cars.slice();
+        removed = carsClone.splice(carsClone.indexOf('Ford'), 2);
+        console.log(cars);
+        console.log(carsClone);
+
+        // trier les tableaux ?
+        carsClone.sort();
+        console.log(carsClone);
+
+        // trier "à l'envers"
+        carsClone.reverse();
+        console.log(carsClone);
+
+        carsTest = [['Fiat', 1956], ['Kyia', 1995], ['Kyia', 1990], ['Ford', 1950]];
+        carsTest.sort();
+        console.table(carsTest);
+
+        // les tableaux à deux dimensions n'existent pas vraiment
+        let tab2d = [ ['a', 'b', 'c'], [12, 12, 13, 14, 15], [10, 23, 56, 4] ];
+        console.log(tab2d);
+        console.log(tab2d[1]);
+        console.log(tab2d[1][1]);
+        console.table(tab2d);
+        console.log('------ parcourir tab2 for ----------');
+        for(let i = 0; i < tab2d.length; i++ ){
+            for(let j = 0; j < tab2d[i].length; j++){
+                console.log(tab2d[i][j]);
+            }
+        }
+
+        console.log('------ parcourir tab2 for of ----------');
+        for(let value of tab2d ){
+            for(let subValue of value){
+                console.log(subValue);
+            }
+        }
+
+        // recherche d'élément avec
+        // .find() => retourne la première occurence qui correspond à la condition
+        console.log('------ .find() ----------');
+        let arrayNum = [5, 8, 12, 130, 3, 44];
+
+        let found = arrayNum.find( function(element){
+            return 20 < element;
+        });
+
+        console.log(found);
+
+        // filtre sur un tableau
+        /*
+        console.log(arrayNum.filter( function(element){
+            return 5 < element;
+        }));
+        */
+        // opérateur arrow
+        /*
+        function(element){
+            return 5 < element;
+        }
+
+        element => 5 < element;
+        */
+
+        console.log(arrayNum.filter( element => 5 < element ));
+
+        // attention aux conséquence en utilisant l'opérateur arrow
+
+        let objet = {
+            numbers: [1, 2, 56, 4, 123],
+            pourChaque: function(){
+                //console.log(this);
+                //console.log(this.numbers);
+                for(let i = 0; i < this.numbers.length; i++){
+                    console.log(`dans le for, this : ${this} et this.numbers[i] : ${this.numbers[i]}`);
+                }
+                let _this = this;
+                this.numbers.forEach( function(value){
+                    console.log(`dans le forEach, this : ${this} et value : ${value}`);
+                    console.log(`dans le forEach, this : ${_this} et value : ${value}`);
+                } );
+            },
+            pourChaqueBis: function(){
+                this.numbers.forEach(value => {
+                    console.log(`dans le forEach, this : ${this} et value : ${value}`);
+                } );
+            }
+        };
+
+        //objet.pourChaque();
+        objet.pourChaqueBis();
+
+        // .map()
+        let numbers = [1, 2, 56, 4, 123];
+        let newNumbers = numbers.map( function(value, index, myArray){
+            return value*10;
+        });
+
+        console.log(numbers);
+        console.log(newNumbers);
+
+        /*
+        Exercice : Tri à bulle
+        tri d'un tableau sans utiliser les fonctions js natives
+        Etape 1 : créer un tableau de 10 éléments a remplir alétoirement d'entier compris entre 1 et 100
+        Etape 2 : trier du plus petit au plus grand
+        Conseil : vous avez le droit d'utiliser des variables tampons
+        */
+
+        // les nombre aléatoires : Math.random
+        console.log(Math.random()); //renvoie un flottant entre 0 et 1
+        // random entre 0 et 5 compris
+        console.log(Math.random()*5); 
+        // random un entier entre 1 et 5 compris
+        console.log( Math.floor(Math.random()*5) + 1 );
+
+        // remplir le tableau
+
+
+        // trier le tableau
+
+    </script>
+</head>
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Javascript Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="../introduction/index.html">Variables & Opérateurs</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/tableau.html">Les tableaux</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/fonction.html">Les fonction</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/storage.html">Variables & Opérateurs</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>Tableaux</h2>
+                </header>
+                <main>
+                    <p>
+                        Tout est dans la console et dans le code.
+                    </p>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
