@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            console.log('page chargée');
+            let btnSession = document.querySelector('#btnSession');
+            let inputSessionUser = document.querySelector('#sessionUser');
+            let dataSession = document.querySelector('#dataSession');
+            let clearSessionItem = document.querySelector('#btnClearSessionItem');
+            let clearSession = document.querySelector('#btnClearSession');
+
+            console.log(btnSession);
+            console.log(sessionStorage);
+
+            if(sessionStorage.getItem('sessionUserName')){
+                dataSession.innerHTML = `<b>${sessionStorage.getItem('sessionUserName')}</b>`;
+            }else{
+                dataSession.innerHTML = `<b>Pas de sessionUser enregistré</b>`;
+            }
+
+            btnSession.addEventListener('click', function(){
+                if(inputSessionUser.value !== ''){
+                    sessionStorage.setItem('sessionUserName', inputSessionUser.value);
+                    dataSession.innerHTML = `<b>${sessionStorage.getItem('sessionUserName')}</b>`;
+                    inputSessionUser.value = '';
+                }
+            });
+
+            //btnClearItem  btnClearSession
+            clearSessionItem.addEventListener('click', function(){
+                sessionStorage.removeItem('sessionUserName');
+                dataSession.innerHTML = `<b>Pas de sessionUser enregistré</b>`;
+            });
+
+            clearSession.addEventListener('click', function(){
+                sessionStorage.clear();
+                dataSession.innerHTML = `<b>Pas de sessionUser enregistré</b>`;
+            });
+
+        });
+        console.log('chargement de la page');
+        
+    </script>
+</head>
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Javascript Introduction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="../introduction/index.html">
+                                    Variables & Opérateurs
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/tableau.html">
+                                    Les tableaux
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/fonction.html">
+                                    Les fonctions
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/destructuration.html">
+                                    La destructuration
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../introduction/storage.html">
+                                    Storage
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-6">
+                <header>
+                    <h2>Le stockage des données en JS</h2>
+                </header>
+                <main>
+                    <h3>sessionStorage</h3>
+                    <p>
+                        <label class="form-label">UserName :</label>
+                        <input type="text" class="form-control" id="sessionUser" value="" />
+                    </p>
+                    <p>
+                        <button id="btnSession" class="btn btn-outline-primary">
+                            Sauvegarder session user name
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnClearSessionItem" class="btn btn-outline-warning">
+                            Supprimer session user name
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnClearSession" class="btn btn-outline-danger">
+                            Vider la session
+                        </button>
+                    </p>
+                    <p>
+                        Session username actuel : <span id="dataSession"></span>
+                    </p>
+                </main>
+            </article>
+            <article class="col-lg-6">
+                <header>
+                    <h2>Le stockage des données en JS</h2>
+                </header>
+                <main>
+                    <h3>localStorage</h3>
+                    
+                </main>
+            </article>
+        </section>
+        <section class="row">
+            <article class="offset-lg-3 col-lg-6">
+                <header>
+                    <h2>Le stockage des données en JS</h2>
+                </header>
+                <main>
+                    <h3>Les cookies</h3>
+                    
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
