@@ -7,11 +7,14 @@ function loaded(callable){
 function loadNav(){
     fetch('../includes/navigation.html')
     .then( function(response){
+        console.log(response);
         return response.text();
     } )
     .then(
         function(nav){
             document.querySelector('body > nav').innerHTML = nav;
+            // utiliser une fonction qui crée des éléments avec createElement
+            // et les ajoute directement dans le DOM
         }
     )
     .catch(function(error){
