@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/scripts.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function(){
             console.log('page chargée');
@@ -46,7 +47,6 @@
                 dataSession.innerHTML = `<b>Pas de sessionUser enregistré</b>`;
             });
 
-
             //localStorage
             let btnLocal = document.querySelector('#btnLocal');
             let inputLocalUser = document.querySelector('#localUser');
@@ -81,10 +81,63 @@
                 localStorage.clear();
                 dataLocal.innerHTML = `<b>Pas de localUserName enregistré</b>`;
             });
+            /*
+            let cookieValue = 'Nico';
+            // création d'une date expiration
+            let dateNow = new Date();
+            console.log(dateNow);
+            // 1 * 24 * 60 * 60 * 1000
+            dateNow.setTime( dateNow.getTime() + (1 * 24 * 60 * 60 * 1000) );
+            console.log(dateNow);
+            // détruire prématurément un cookie, il faut lui donner une date d'expiration dépassée
+            let anteDateNow = new Date();
+            anteDateNow.setTime( anteDateNow.getTime() + (-1 * 24 * 60 * 60 * 1000) );
+            console.log(anteDateNow);
+
+            // créer un cookie qui expire à dateNow
+            document.cookie = `monCookie=${cookieValue}; expires=${anteDateNow.toUTCString()}; SameSite=Strict; Secure`;
+
+            
+            */
+
+            // #cookieValue #btnCookie #dataCookieValue #btnEmptyCookieValue #btnClearCookieValue
+            let btnCookie = document.querySelector('#btnCookie');
+            let cookieValue = document.querySelector('#cookieValue');
+            let dataCookieValue = document.querySelector('#dataCookieValue');
+            let btnEmptyCookieValue = document.querySelector('#btnEmptyCookieValue');
+            let btnClearCookieValue = document.querySelector('#btnClearCookieValue');
+
+            if(getCookie('monCookie')){
+                dataCookieValue.innerText = getCookie('monCookie');
+            }else{
+                dataCookieValue.innerHTML = `<b>Pas de cookie "monCookie" d'enregistré</b>`;
+            }
+
+            btnCookie.addEventListener('click', function(){
+                if(cookieValue.value !== ''){
+                    setCookie('monCookie', cookieValue.value, 1);
+                    cookieValue.value = '';
+                    dataCookieValue.innerText = getCookie('monCookie');
+                    console.log(document.cookie);
+                }
+            });
+
+            btnEmptyCookieValue.addEventListener('click', function(){
+                    setCookie('monCookie', '', 1);
+                    dataCookieValue.innerText = getCookie('monCookie');
+                    console.log(document.cookie);
+            });
+
+            btnClearCookieValue.addEventListener('click', function(){
+                    setCookie('monCookie');
+                    dataCookieValue.innerText = '';
+                    console.log(document.cookie);
+            });
+
+            console.log(document.cookie);
 
         });
         console.log('chargement de la page');
-        
     </script>
 </head>
 <body>
@@ -207,7 +260,28 @@
                 </header>
                 <main>
                     <h3>Les cookies</h3>
-                    
+                    <p>
+                        <label class="form-label">Cookie Value :</label>
+                        <input type="text" class="form-control" id="cookieValue" value="" />
+                    </p>
+                    <p>
+                        <button id="btnCookie" class="btn btn-outline-primary">
+                            Sauvegarder cookie value
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnEmptyCookieValue" class="btn btn-outline-warning">
+                            Vider cookie value
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnClearCookieValue" class="btn btn-outline-danger">
+                            Supprimer cookie value
+                        </button>
+                    </p>
+                    <p>
+                        Cookie value actuel : <span id="dataCookieValue"></span>
+                    </p>
                 </main>
             </article>
         </section>
