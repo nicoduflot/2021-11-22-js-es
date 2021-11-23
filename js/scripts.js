@@ -1,5 +1,25 @@
+//création d'une petite biblio de fonctions de raccourcis pour agir sur le DOM
+// le DOM est chargée
+function loaded(callable){
+    window.addEventListener('DOMContentLoaded', callable);
+}
 
-//fonction de crétion de cookie
+function loadNav(){
+    fetch('../includes/navigation.html')
+    .then( function(response){
+        return response.text();
+    } )
+    .then(
+        function(nav){
+            document.querySelector('body > nav').innerHTML = nav;
+        }
+    )
+    .catch(function(error){
+        console.log(error);
+    });
+}
+
+//fonction de création de cookie
 // par défaut, la fonction détruit le cookie appelé
 // la durée de validité du cookie sera exprimée en jours
 

@@ -10,107 +10,11 @@
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/scripts.js"></script>
     <script>
-        loaded( function(){
-            loadNav();
+        loaded(function(){
+            //console.log('page chargée');
+            
         });
-        //destructuration
-        let liste = [1, 2, 3, 4];
-        // assigner les 3 premiers éléments du tableau à des variables distinctes a, b et c ?
-        /*
-        let a = liste[0]; 
-        let b = liste[1]; 
-        let c = liste[2]; 
-        */
-        let [a, b, c] = liste;
-        console.log(`a = ${a}, b = ${b}, c = ${c}`);
-
-        let [d,  , f, g] = liste;
-        console.log(`d = ${d}, f = ${f}, g = ${g}`);
-
-        let [h, i, j, k = 0, l = 5] = liste;
-        console.log(`h = ${h}, i = ${i}, j = ${j}, k = ${k}, l = ${l}`);
-
-        function truc(unTruc, uneOption, ...valeurs){
-            let [a = 0, b = false, c = 'Compta'] = valeurs;
-            //code fonction
-        }
-
-        let [m, n, o, p, q, r = 6] = liste;
-        console.log(`m = ${m}, n = ${n}, o = ${o}, p = ${p}, q = ${q}, r = ${r}`);
-
-        // destructuration d'objet
-        let objet = {
-            lastName: 'Bond',
-            firstName: 'James',
-            job: 'Agent Secret',
-            helloBond: function(value){
-                return `Hello ${value}`;
-            }
-        };
-
-        console.log(objet);
-        console.log(objet.firstName);
-        console.log(objet.helloBond('Monney Penny'));
-
-        let {lastName, firstName, job, helloBond} = objet;
-
-        console.log(firstName);
-        console.log(helloBond('Peppa Pig'));
-
-        // pour créer des alias aux attributs et méthodes del'objet :
-        let {
-            lastName: nom, 
-            firstName: prenom, 
-            job: boulot, 
-            pseudo = '007',
-            helloBond: salutation
-        } = objet;
-
-        console.log(nom);
-        console.log(salutation('Sam le pompier'));
-
-        // échange de valeur
-        let [number1, number2] = [10, 72];
-        console.log(`avant le swap : number1 : ${number1} et number2 : ${number2}`);
-        [number1, number2] = [number2, number1];
-        console.log(`après le swap : number1 : ${number1} et number2 : ${number2}`);
-
-        let personnage1 = {
-            nomHeros: 'Herbert',
-            prenomHeros: 'Le canard',
-            multi: function(){
-                return 'Boule de feu';
-            }
-        };
-
-        let personnage2 = {
-            nomHeros: 'Marvin',
-            prenomHeros: 'Le rouge',
-            multi: function(){
-                return 'Rage quit';
-            }
-        };
-
-        console.log(`personnage1.nomHeros : ${personnage1.nomHeros}, 
-personnage2.nomHeros : ${personnage2.nomHeros}, 
-personnage1 multi :${personnage1.multi}, 
-personnage2 multi :${personnage2.multi}`);
-
-        [personnage1.nomHeros, 
-        personnage2.nomHeros, 
-        personnage1.multi, 
-        personnage2.multi
-        ] = [
-        personnage2.nomHeros, 
-        personnage1.nomHeros, 
-        personnage2.multi, 
-        personnage1.multi
-        ];
-        console.log(`personnage1.nomHeros : ${personnage1.nomHeros}, 
-personnage2.nomHeros : ${personnage2.nomHeros}, 
-personnage1 multi :${personnage1.multi}, 
-personnage2 multi :${personnage2.multi}`);
-        
+        console.log('chargement de la page');
     </script>
 </head>
 <body>
@@ -159,6 +63,19 @@ personnage2 multi :${personnage2.multi}`);
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Intractions DOM
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="../dom/index.html">
+                                    Introduction
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -167,14 +84,19 @@ personnage2 multi :${personnage2.multi}`);
         <section class="row">
             <article class="col-lg-12">
                 <header>
-                    <h2>La destructuration</h2>
+                    <h2>Le DOM : Document Object Model</h2>
                 </header>
                 <main>
+                    <h3>sessionStorage</h3>
                     <p>
-                        C'est un mode d'assignation de variable et d'objet
+                        le <b>DOM</b> nous permet de repréer, analyser, modifier et 
+                        supprimer des éléments de la page HTML
                     </p>
                     <p>
-                        Tout est dans la console et dans le code.
+                        Il faut que tous les éléments soient chargés pour qu'il soit 
+                        possible d'agir sur eux avec JS.
+                        On écoute l'évènement de la fenêtre DOMContentLoaded qui survient
+                        quand la page est totalement chargée.
                     </p>
                 </main>
             </article>
