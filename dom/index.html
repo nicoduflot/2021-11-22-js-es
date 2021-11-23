@@ -13,6 +13,52 @@
         loaded(function(){
             //console.log('page chargée');
             loadNav();
+            //let titleChapter = document.querySelectorAll('.titreChapitre');
+            let titleChapter = sAll('.titreChapitre');
+            console.log(titleChapter);
+            titleChapter.forEach(function(title){
+                title.addEventListener('mouseover', function(){
+                    console.log(`survol du titre ${this.innerText}`);
+                });
+
+                title.addEventListener('click', function(){
+                    console.log(`clique sur le titre ${this.innerText}`);
+                });
+
+            });
+
+            let allP = sAll('p:not(#special)');
+            console.log(allP);
+
+            s('#checkP').addEventListener('click', function(){
+                allP.forEach(function(paragraphe){
+                    console.log(paragraphe.innerText);
+                });
+            });
+
+            allP.forEach(function(paragraphe){
+                paragraphe.addEventListener('click', function(){
+                    s('#showP').innerHTML = this.innerHTML;
+                });
+            });
+
+            let imgOver = s('#imgOver');
+
+            console.log(imgOver);
+
+            imgOver.addEventListener('mouseover', function(){
+                imgOver.setAttribute('src', '../images/pip-boy-thumb-up.png');
+                imgOver.setAttribute('alt', 'Le pip boy fait un pouce en l\'air');
+                //imgOver.classList.add('red-border');
+                imgOver.classList.toggle('red-border');
+            });
+
+            imgOver.addEventListener('mouseout', function(){
+                imgOver.setAttribute('src', '../images/pip-boy-thumb-down.png');
+                imgOver.removeAttribute('alt');
+                //imgOver.classList.remove('red-border');
+                imgOver.classList.toggle('red-border');
+            });
             
         });
         console.log('chargement de la page');
@@ -32,9 +78,9 @@
                     <h2>Le DOM : Document Object Model</h2>
                 </header>
                 <main>
-                    <h3>sessionStorage</h3>
+                    <h3 class="titreChapitre">sessionStorage</h3>
                     <p>
-                        le <b>DOM</b> nous permet de repréer, analyser, modifier et 
+                        le <b>DOM</b> nous permet de repérer, analyser, modifier et 
                         supprimer des éléments de la page HTML
                     </p>
                     <p>
@@ -43,6 +89,32 @@
                         On écoute l'évènement de la fenêtre DOMContentLoaded qui survient
                         quand la page est totalement chargée.
                     </p>
+                    <h3 class="titreChapitre">Agir sur le DOM</h3>
+                    <p>
+                        Pour agir sur le DOM il faut :
+                    </p>
+                    <ul>
+                        <li>Connaître l'élément surveillé l'élément du DOM, de la page</li>
+                        <li>Connaître l'événement écouté : le déclencheur</li>
+                    </ul>
+                    <p>
+                        <button class="btn btn-secondary" id="checkP">
+                            Tester les paragraphes
+                        </button>
+                    </p>
+                    <div id="showP">
+
+                    </div>
+                    <p id="special">
+                        Lorem ipsum dolor sit amet 
+                        consectetur adipisicing elit. 
+                        Nihil hic numquam magnam ullam, 
+                        ea odio illo doloremque molestias 
+                        accusamus corporis corrupti doloribus 
+                        ab! Mollitia provident quibusdam libero, 
+                        fugit a perferendis.
+                    </p>
+                    <img src="../images/pip-boy-thumb-down.png" width="200" id="imgOver" />
                 </main>
             </article>
         </section>

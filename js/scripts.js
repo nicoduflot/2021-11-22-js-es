@@ -4,6 +4,14 @@ function loaded(callable){
     window.addEventListener('DOMContentLoaded', callable);
 }
 
+function s(selector){
+    return document.querySelector(selector);
+}
+
+function sAll(selector){
+    return document.querySelectorAll(selector);
+}
+
 function loadNav(){
     fetch('../includes/navigation.html')
     .then( function(response){
