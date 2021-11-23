@@ -11,6 +11,7 @@
     <script>
         window.addEventListener('DOMContentLoaded', function(){
             console.log('page chargée');
+            //sessionStorage
             let btnSession = document.querySelector('#btnSession');
             let inputSessionUser = document.querySelector('#sessionUser');
             let dataSession = document.querySelector('#dataSession');
@@ -43,6 +44,42 @@
             clearSession.addEventListener('click', function(){
                 sessionStorage.clear();
                 dataSession.innerHTML = `<b>Pas de sessionUser enregistré</b>`;
+            });
+
+
+            //localStorage
+            let btnLocal = document.querySelector('#btnLocal');
+            let inputLocalUser = document.querySelector('#localUser');
+            let dataLocal = document.querySelector('#dataLocal');
+            let clearLocalItem = document.querySelector('#btnClearLocalItem');
+            let clearLocal = document.querySelector('#btnClearLocal');
+
+            console.log(btnLocal);
+            console.log(localStorage);
+
+            if(localStorage.getItem('localUserName')){
+                dataLocal.innerHTML = `<b>${localStorage.getItem('localUserName')}</b>`;
+            }else{
+                dataLocal.innerHTML = `<b>Pas de localUserName enregistré</b>`;
+            }
+
+            btnLocal.addEventListener('click', function(){
+                if(inputLocalUser.value !== ''){
+                    localStorage.setItem('localUserName', inputLocalUser.value);
+                    dataLocal.innerHTML = `<b>${localStorage.getItem('localUserName')}</b>`;
+                    inputLocalUser.value = '';
+                }
+            });
+
+            //btnClearItem  btnClearSession
+            clearLocalItem.addEventListener('click', function(){
+                localStorage.removeItem('localUserName');
+                dataLocal.innerHTML = `<b>Pas de localUserName enregistré</b>`;
+            });
+
+            clearLocal.addEventListener('click', function(){
+                localStorage.clear();
+                dataLocal.innerHTML = `<b>Pas de localUserName enregistré</b>`;
             });
 
         });
@@ -138,7 +175,28 @@
                 </header>
                 <main>
                     <h3>localStorage</h3>
-                    
+                    <p>
+                        <label class="form-label">UserName :</label>
+                        <input type="text" class="form-control" id="localUser" value="" />
+                    </p>
+                    <p>
+                        <button id="btnLocal" class="btn btn-outline-primary">
+                            Sauvegarder local user name
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnClearLocalItem" class="btn btn-outline-warning">
+                            Supprimer local user name
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btnClearLocal" class="btn btn-outline-danger">
+                            Vider le local storage
+                        </button>
+                    </p>
+                    <p>
+                        Local username actuel : <span id="dataLocal"></span>
+                    </p>
                 </main>
             </article>
         </section>
