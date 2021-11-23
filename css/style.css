@@ -5,3 +5,23 @@ h1, .h1{
 .red-border{
     border: 1px solid #ff0000; /* f00 */
 }
+
+.paragraphe-vert{
+    color: #aacc00;
+}
+
+#carre{
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+    margin: 20px auto;
+    transition: transform 1s;
+}
+
+.left{
+    transform: translateX( calc( -1 * ( 100vw/2 - 100px ) ) );
+}
+
+.right{
+    transform: translateX( calc( 100vw/2 - 100px ) );
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+        loaded(function(){
+            loadNav();
+            //ajouter de la couleur via l'attribut style d'un élément
+            s('#btn').addEventListener('click', function(){
+                let cible = s('#cible');
+                //console.log(cible.style.color);
+                if(cible.style.color !== ''){
+                    //cible.style.removeProperty('color');
+                    //cible.style.setProperty('color', null);
+                    cible.style.color = null;
+                }else{
+                    cible.style.setProperty('color', '#aacc00');
+                }
+            });
+
+            /*
+            s('#btnClasse').addEventListener('click', function(){
+                s('#cibleClasse').classList.toggle('paragraphe-vert');
+            });
+            */
+
+            s('#btnClasse').addEventListener('click', ()=> s('#cibleClasse').classList.toggle('paragraphe-vert') );
+
+            s('#gauche').addEventListener('click', () => carre.className = 'left');
+            s('#droite').addEventListener('click', () => carre.className = 'right');
+            //s('#centre').addEventListener('click', () => carre.className = '');
+            s('#centre').addEventListener('click', () => carre.removeAttribute('class'));
+
+        });
+    </script>
+</head>
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>Agir sur le CSS</h2>
+                </header>
+                <main>
+                    <button id="btn" class="btn btn-secondary">
+                        Ajouter de la couleur
+                    </button>
+                    <p id="cible">
+                        Lorem ipsum dolor sit, amet consectetur 
+                        adipisicing elit. Numquam explicabo 
+                        deleniti beatae dolores quisquam esse, 
+                        dolorum atque architecto repellat quo ad 
+                        earum laudantium tenetur quidem aliquid 
+                        rem quos voluptatibus a?
+                    </p>
+                    <button id="btnClasse" class="btn btn-secondary">
+                        Ajouter de la couleur en classe
+                    </button>
+                    <p id="cibleClasse">
+                        Lorem ipsum dolor sit, amet consectetur 
+                        adipisicing elit. Numquam explicabo 
+                        deleniti beatae dolores quisquam esse, 
+                        dolorum atque architecto repellat quo ad 
+                        earum laudantium tenetur quidem aliquid 
+                        rem quos voluptatibus a?
+                    </p>
+                    <p class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary" id="gauche">Gauche</button>
+                        <button type="button" class="btn btn-primary" id="centre">Centre</button>
+                        <button type="button" class="btn btn-primary" id="droite">Droite</button>
+                    </p>
+                    <div id="carre">
+
+                    </div>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
