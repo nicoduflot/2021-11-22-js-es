@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+        loaded(function(){
+            loadNav();
+            // #addSpan #test
+            s('#addSpan').addEventListener('click', function(){
+                s('#test').innerHTML = `
+                    <span id="testSpan">Test</span>
+                `;
+                s('#testSpan').addEventListener('click', function(){
+                    console.log('testSpan OK');
+                });
+            });
+
+            //#btn
+            let index = 1;
+            s('#btn').addEventListener('click', function(){
+                let paragraphe = cE('p');
+                paragraphe.setAttribute('id', `p_${index}`);
+                let div = s('#container') || cE('div');
+                div.setAttribute('id', 'container');
+                let lorem = `p_${index} : Lorem, ipsum dolor sit 
+amet consectetur adipisicing elit. 
+Corporis nam officiis ab ad excepturi 
+quod ex quidem. Doloremque quod eum, 
+maiores excepturi eos tenetur ducimus 
+sapiente facere ea labore voluptates?`;
+                let content = document.createTextNode(lorem);
+                paragraphe.appendChild(content);
+                div.appendChild(paragraphe);
+                s('#btn').after(div);
+                s(`#p_${index}`).addEventListener('click', function(){
+                    console.log(this.getAttribute('id'));
+                });
+
+                index++;
+                console.log(paragraphe);
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>Créer dans le DOM</h2>
+                </header>
+                <main>
+                    <p id="test">
+
+                    </p>
+                    <p>
+                        <button id="addSpan" class="btn btn-secondary">
+                            Ajouter span testSpan
+                        </button>
+                    </p>
+                    <button id="btn" class="btn btn-outline-primary">
+                        Ajouter un paragraphe
+                    </button>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>

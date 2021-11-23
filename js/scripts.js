@@ -12,10 +12,14 @@ function sAll(selector){
     return document.querySelectorAll(selector);
 }
 
+//raccourci crateElement
+function cE(element){
+    return document.createElement(element);
+}
+
 function loadNav(){
     fetch('../includes/navigation.html')
     .then( function(response){
-        console.log(response);
         return response.text();
     } )
     .then(
