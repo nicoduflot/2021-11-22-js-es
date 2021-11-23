@@ -9,63 +9,104 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/bootstrap.bundle.js"></script>
     <script>
-        // l'opérateur ? => Rest Parameter =>  ...valeurs
+        //destructuration
+        let liste = [1, 2, 3, 4];
+        // assigner les 3 premiers éléments du tableau à des variables distinctes a, b et c ?
         /*
-        function maFonction(var01, var02, ...valeurs){
-            // valeurs est traitée comme un tableau de valeurs
-        }
-
-        maFaonction('test', 42, 1, 2, 3, 4, 5);
-        // ...valeur => valeur = [1, 2, 3, 4, 5]
+        let a = liste[0]; 
+        let b = liste[1]; 
+        let c = liste[2]; 
         */
-        // ATTENTION /!\ cet opérateur est à définir 
-        // en tout dernier paramètre d'appel de la fonction
+        let [a, b, c] = liste;
+        console.log(`a = ${a}, b = ${b}, c = ${c}`);
 
-        function addition(...values){
-            let result = 0;
-            for(let value of values){
-                if( !isNaN(value) ){
-                    result += parseFloat(value);
-                }
-            }
-            return result;
+        let [d,  , f, g] = liste;
+        console.log(`d = ${d}, f = ${f}, g = ${g}`);
+
+        let [h, i, j, k = 0, l = 5] = liste;
+        console.log(`h = ${h}, i = ${i}, j = ${j}, k = ${k}, l = ${l}`);
+
+        function truc(unTruc, uneOption, ...valeurs){
+            let [a = 0, b = false, c = 'Compta'] = valeurs;
+            //code fonction
         }
 
-        console.log(addition(1, 2, '3', 4, 5, 6, 7));
+        let [m, n, o, p, q, r = 6] = liste;
+        console.log(`m = ${m}, n = ${n}, o = ${o}, p = ${p}, q = ${q}, r = ${r}`);
 
-        let maFonctionAnonyme = function(name = null){
-            /*
-            let result = 'Hello ';
-            if(null === name){
-                result += 'Kitty';
-            }else{
-                result += name
+        // destructuration d'objet
+        let objet = {
+            lastName: 'Bond',
+            firstName: 'James',
+            job: 'Agent Secret',
+            helloBond: function(value){
+                return `Hello ${value}`;
             }
-            return result;
-            */
-            return `Hello ${ (null === name)? 'Kitty' : name }`;
         };
 
-        console.log(maFonctionAnonyme());
-        console.log(maFonctionAnonyme('Nicolas'));
+        console.log(objet);
+        console.log(objet.firstName);
+        console.log(objet.helloBond('Monney Penny'));
 
-        // avec l'opérateur arrow
-        let maFonctionAnonyme2 = (name = null) => `Hello ${ (null === name)? 'Kitty' : name }`;
+        let {lastName, firstName, job, helloBond} = objet;
 
-        // fonction auto-exécuté
-        ( function(){
-            console.table([1, 2, 3, 4, 5]);
-        } )();
+        console.log(firstName);
+        console.log(helloBond('Peppa Pig'));
 
-        ( () => {
-            console.table([1, 2, 3, 4, 5]);
-        } )();
+        // pour créer des alias aux attributs et méthodes del'objet :
+        let {
+            lastName: nom, 
+            firstName: prenom, 
+            job: boulot, 
+            pseudo = '007',
+            helloBond: salutation
+        } = objet;
 
-        ( (tab, bibi) => {
-            console.table(tab);
-            console.log(bibi);
-        } )( [1, 2, 3, 4], 'test' );
+        console.log(nom);
+        console.log(salutation('Sam le pompier'));
 
+        // échange de valeur
+        let [number1, number2] = [10, 72];
+        console.log(`avant le swap : number1 : ${number1} et number2 : ${number2}`);
+        [number1, number2] = [number2, number1];
+        console.log(`après le swap : number1 : ${number1} et number2 : ${number2}`);
+
+        let personnage1 = {
+            nomHeros: 'Herbert',
+            prenomHeros: 'Le canard',
+            multi: function(){
+                return 'Boule de feu';
+            }
+        };
+
+        let personnage2 = {
+            nomHeros: 'Marvin',
+            prenomHeros: 'Le rouge',
+            multi: function(){
+                return 'Rage quit';
+            }
+        };
+
+        console.log(`personnage1.nomHeros : ${personnage1.nomHeros}, 
+personnage2.nomHeros : ${personnage2.nomHeros}, 
+personnage1 multi :${personnage1.multi}, 
+personnage2 multi :${personnage2.multi}`);
+        
+        [personnage1.nomHeros, 
+        personnage2.nomHeros, 
+        personnage1.multi, 
+        personnage2.multi
+        ] = [
+        personnage2.nomHeros, 
+        personnage1.nomHeros, 
+        personnage2.multi, 
+        personnage1.multi
+        ];
+        console.log(`personnage1.nomHeros : ${personnage1.nomHeros}, 
+personnage2.nomHeros : ${personnage2.nomHeros}, 
+personnage1 multi :${personnage1.multi}, 
+personnage2 multi :${personnage2.multi}`);
+        
     </script>
 </head>
 <body>
@@ -122,9 +163,12 @@
         <section class="row">
             <article class="col-lg-12">
                 <header>
-                    <h2>Les fonctions</h2>
+                    <h2>La destructuration</h2>
                 </header>
                 <main>
+                    <p>
+                        C'est un mode d'assignation de variable et d'objet
+                    </p>
                     <p>
                         Tout est dans la console et dans le code.
                     </p>
