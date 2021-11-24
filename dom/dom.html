@@ -58,6 +58,34 @@ sapiente facere ea labore voluptates?`;
             on vérifiera si un élément renseigné n'est déjà pas dans la liste,
             le cas échéant il ne sera pas ajouté en doublon
             */
+            let input = s('#item');
+            let btn = s('#addItemBtn');
+            let list = s('#toDoList');
+
+            function addElement(){
+                if('' !== input.value){
+                    let val = input.value;
+                    input.value = '';
+                    input.focus();
+                    //vérification des doublons
+                    if(Array.from(list.children).map( c=> c.textContent ).includes(val)){
+                        return;
+                    }
+                    let li = cE('li');
+                    li.textContent = val;
+                    li.addEventListener('click', function(){
+                        this.remove();
+                    });
+                    list.appendChild(li)
+                }
+            }
+
+            btn.addEventListener('click', addElement);
+            input.addEventListener('keyup', event => {
+                if('Enter' === event.key){
+                    addElement();
+                }
+            });
 
         });
     </script>
@@ -116,7 +144,7 @@ sapiente facere ea labore voluptates?`;
                 <main>
                     <div id="list">
                         <ul id="toDoList">
-
+                            
                         </ul>
                     </div>
                 </main>
