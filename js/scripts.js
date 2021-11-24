@@ -56,3 +56,24 @@ function getCookie(name){
     }
     return false;
 }
+
+// getXhr : connexion pour AJAX
+function getXhr(){
+    let xhr = null;
+    // est-ce que le navigateur supporte AJAX
+    if( window.ActiveXObject || window.XMLHttpRequest){ //ou un protocole pour IE ou les autres navigateurs
+        if(window.ActiveXObject){ // si IE
+            try{ //on essaie un premier des deux protocole XMLHTTP d'IE
+                xhr = new ActiveXObject('Msxml2.XMLHTTP');
+            }catch(e){ // si le premier protocole ne fonctionne pas, on utilise l'autre
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+        }else{// autre navigateurs
+            xhr = new XMLHttpRequest();
+        }
+    }else{//le navigateur ne supporte pas ajax
+        console.log('Votre navigateur ne supporte pas AJAX');
+        xhr = false;
+    }
+    return xhr; //on renvoie le résultat de la fonction
+}

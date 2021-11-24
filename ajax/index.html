@@ -11,10 +11,45 @@
     <script src="../js/scripts.js"></script>
     <script>
         loaded(function(){
-            
-            
+            loadNav();
+            // pour utiliser ajax, il faut ouvrir une connexion xhr
+            //création d'une fonction de connexion
+            let xhr = getXhr();
+            sAll('button.read').forEach( btn => {
+                btn.addEventListener('click', function(){
+                    //méthode open(verbe http (GET, POST), url, async(true / false), login, password);
+                    /*
+                    xhr.open('GET', btn.dataset.url, false);
+                    xhr.send();
+                    // xhr reçoit une réponse à la requête envoyée avec .send()
+                    s('#result').innerHTML = xhr.responseText;
+                    */
+                    xhr.onreadystatechange = () => {
+                        //xhr.readyState
+                        /*
+                        0 : unsent              -> .open() n'a pas encore été appelé
+                        1 : openned             -> .open() a été appelé
+                        2 : headers_received    -> les entêtes de la requête ont été reçus
+                        3 : loading             -> la requête envoyée est en cours de traitement
+                        4 : done                -> le traitement de la requête est terminé
+                        */
+                        //xhr.status si 200 === xhr.status -> c'est OK sinon on récupère un code d'erreur
+                        if(200 !== xhr.status){
+                            s('#result').innerHTML = `<b style="color: red">${xhr.status}</b>`;
+                        }
+                        if(200 === xhr.status && xhr.DONE === xhr.readyState){
+                            s('#result').innerHTML = xhr.responseText;
+                        }
+                    };
+                    xhr.onerror = () => {
+                        s('#result').innerHTML = `<b style="color: red">
+                            Une erreur xhr.status : ${xhr.status}</b>`;
+                    };
+                    xhr.open('GET', btn.dataset.url);
+                    xhr.send();
+                });
+            } );
         });
-        console.log('chargement de la page');
     </script>
 </head>
 <body>
@@ -31,9 +66,18 @@
                     <h2>AJAX</h2>
                 </header>
                 <main>
+                    <h3>Asynchronous Javascript And Xml</h3>
                     <h3>xhr : Xml Http Request</h3>
                     <p>
-                        <button class="btn btn "></button>
+                        <button class="btn btn-secondary read" data-url="../resource/file.txt">
+                            Lire un fichier txt
+                        </button>
+                        <button class="btn btn-secondary read" data-url="../toto/resource/file.txt">
+                            Lire un fichier txt en erreur
+                        </button>
+                    </p>
+                    <p id="result">
+
                     </p>
                 </main>
             </article>
