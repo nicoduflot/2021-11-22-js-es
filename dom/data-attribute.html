@@ -44,6 +44,59 @@
             });
 
             //pointeur ligne colonne
+            let coordonnees = sAll('[data-column][data-line]');
+            //console.log(coordonnees);
+            coordonnees.forEach( element => {
+                //element.addEventListener('click', function(){ console.log(this.innerText); });
+                element.addEventListener('mouseover', function(){
+                    //console.log(`x : ${this.dataset.column} - y : ${this.dataset.line}`);
+                    let column = element.dataset.column;
+                    let line = element.dataset.line;
+                    sAll(`[data-column="${column}"]`).forEach( td => {
+                        td.style.backgroundColor = 'rgba(255,0,0,0.5)';
+                    });
+                    /*
+                    sAll(`[data-line="${line}"]`).forEach( td => {
+                        td.style.backgroundColor = 'rgba(255,0,0,0.5)';
+                    });
+                    */
+                    element.parentNode.style.backgroundColor = 'rgba(255,0,0,0.5)';
+                    s('#xy').innerHTML = `x : ${column} - y : ${line}`;
+                    s('#xValue').value = parseInt(column);
+                    s('#yValue').value = parseInt(line);
+                });
+                element.addEventListener('mouseout', function(){
+                    coordonnees.forEach( td => {
+                        td.style.removeProperty('background-color');
+                    });
+                    element.parentNode.style.removeProperty('background-color');
+                    s('#xy').innerHTML = `x : &nbsp; - y : &nbsp;`;
+                    s('#xValue').value = 0;
+                    s('#yValue').value = 0;
+                });
+            });
+            /*
+            let setX = s('#xValue');
+            let setY = s('#yValue');
+            setX.addEventListener('change', function(){
+                let column = setX.value;
+                let line = setY.value;
+                console.log(column, line);
+                sAll(`[data-column="${column}"]`).forEach( td => {
+                    td.style.backgroundColor = 'rgba(255,0,0,0.5)';
+                });
+                s('#xy').innerHTML = `x : ${column} - y : ${line}`;
+            });
+            setY.addEventListener('change', function(){
+                let column = setX.value;
+                let line = setY.value;
+                console.log(column, line);
+                sAll(`[data-column="${line}"]`).forEach( td => {
+                    td.style.backgroundColor = 'rgba(255,0,0,0.5)';
+                });
+                s('#xy').innerHTML = `x : ${column} - y : ${line}`;
+            });
+            */
         });
     </script>
 </head>
@@ -76,60 +129,66 @@
                         <code>
                             let urlOver = document.querySelector('img[data-over][data-test="test"]').dataset.over;
                         </code>
-                        <hr />
-                        <p data-module="color">
-                            Lorem ipsum dolor sit amet, 
-                            consectetur adipisicing elit. 
-                            Sed, quidem! Quod sapiente consequatur 
-                            eius in officia ducimus nisi, totam quo 
-                            vitae voluptate, quasi rerum! Debitis 
-                            aliquid aliquam et suscipit ab!
-                        </p>
-                        <p data-module="color" data-color="#09f">
-                            Lorem ipsum dolor sit amet, 
-                            consectetur adipisicing elit. 
-                            Sed, quidem! Quod sapiente consequatur 
-                            eius in officia ducimus nisi, totam quo 
-                            vitae voluptate, quasi rerum! Debitis 
-                            aliquid aliquam et suscipit ab!
-                        </p>
-                        <p data-module="color" data-color="orange">
-                            Lorem ipsum dolor sit amet, 
-                            consectetur adipisicing elit. 
-                            Sed, quidem! Quod sapiente consequatur 
-                            eius in officia ducimus nisi, totam quo 
-                            vitae voluptate, quasi rerum! Debitis 
-                            aliquid aliquam et suscipit ab!
-                        </p>
-                        <p data-module="font" data-weight="bold">
-                            Lorem ipsum dolor sit amet, 
-                            consectetur adipisicing elit. 
-                            Sed, quidem! Quod sapiente consequatur 
-                            eius in officia ducimus nisi, totam quo 
-                            vitae voluptate, quasi rerum! Debitis 
-                            aliquid aliquam et suscipit ab!
-                        </p>
-                        <p data-module="magie">
-                            Lorem ipsum dolor sit amet, 
-                            consectetur adipisicing elit. 
-                            Sed, quidem! Quod sapiente consequatur 
-                            eius in officia ducimus nisi, totam quo 
-                            vitae voluptate, quasi rerum! Debitis 
-                            aliquid aliquam et suscipit ab!
-                        </p>
-                        <p data-module="after">
-                            Lorem ipsum dolor sit amet, 
-                            consectetur adipisicing elit. 
-                            Sed, quidem! Quod sapiente consequatur 
-                            eius in officia ducimus nisi, totam quo 
-                            vitae voluptate, quasi rerum! Debitis 
-                            aliquid aliquam et suscipit ab!
-                        </p>
+                    </p>
+                    <hr />
+                    <p data-module="color">
+                        Lorem ipsum dolor sit amet, 
+                        consectetur adipisicing elit. 
+                        Sed, quidem! Quod sapiente consequatur 
+                        eius in officia ducimus nisi, totam quo 
+                        vitae voluptate, quasi rerum! Debitis 
+                        aliquid aliquam et suscipit ab!
+                    </p>
+                    <p data-module="color" data-color="#09f">
+                        Lorem ipsum dolor sit amet, 
+                        consectetur adipisicing elit. 
+                        Sed, quidem! Quod sapiente consequatur 
+                        eius in officia ducimus nisi, totam quo 
+                        vitae voluptate, quasi rerum! Debitis 
+                        aliquid aliquam et suscipit ab!
+                    </p>
+                    <p data-module="color" data-color="orange">
+                        Lorem ipsum dolor sit amet, 
+                        consectetur adipisicing elit. 
+                        Sed, quidem! Quod sapiente consequatur 
+                        eius in officia ducimus nisi, totam quo 
+                        vitae voluptate, quasi rerum! Debitis 
+                        aliquid aliquam et suscipit ab!
+                    </p>
+                    <p data-module="font" data-weight="bold">
+                        Lorem ipsum dolor sit amet, 
+                        consectetur adipisicing elit. 
+                        Sed, quidem! Quod sapiente consequatur 
+                        eius in officia ducimus nisi, totam quo 
+                        vitae voluptate, quasi rerum! Debitis 
+                        aliquid aliquam et suscipit ab!
+                    </p>
+                    <p data-module="magie">
+                        Lorem ipsum dolor sit amet, 
+                        consectetur adipisicing elit. 
+                        Sed, quidem! Quod sapiente consequatur 
+                        eius in officia ducimus nisi, totam quo 
+                        vitae voluptate, quasi rerum! Debitis 
+                        aliquid aliquam et suscipit ab!
+                    </p>
+                    <p data-module="after">
+                        Lorem ipsum dolor sit amet, 
+                        consectetur adipisicing elit. 
+                        Sed, quidem! Quod sapiente consequatur 
+                        eius in officia ducimus nisi, totam quo 
+                        vitae voluptate, quasi rerum! Debitis 
+                        aliquid aliquam et suscipit ab!
                     </p>
                     <hr />
                     <p>
-                        Coordonnées : <span id="xy"></span>
+                        Coordonnées : <span id="xy">x : &nbsp; - y : &nbsp;</span>
                     </p>
+                    
+                    <p>
+                        <label>X : </label><input id="xValue" type="range" min="0" max="4" step="1" value="0" /><br />
+                        <label>y : </label><input id="yValue" type="range" min="0" max="4" step="1" value="0" />
+                    </p>
+                    
                     <table id="coord" class="table" style="width: 300px;">
                         <tr>
                             <td data-column="0" data-line="0">0 - 0</td>
