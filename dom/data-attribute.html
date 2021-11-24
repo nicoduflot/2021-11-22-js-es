@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+        loaded(function(){
+            loadNav();
+            let test = s('h2[data-title]');
+            console.log(test.dataset.title);
+        });
+    </script>
+</head>
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2 data-title="Les attributs data- (dataset)">
+                        Les attributs data- (dataset)
+                    </h2>
+                </header>
+                <main>
+                    <p>
+                        Les attributs data- sont des attributs HTML dynamiques.
+                        Ce qui est dynamique : leurs noms et les valeurs qu'ils possèdent.
+                        Pour les utiliser, on crée dans la balise un attribut avec la forme suivante :
+                        <code>data-*="..."</code>, * sera le nom du dataset, ... sa valeur.
+                        par exemple <br />
+                        <code>
+                            &lt;img data-over="../images/test.png" src="../images/test-img.png" data-test="test" /&gt;
+                        </code><br />
+                        pour atteindre ce dataset : <br />
+                        <code>
+                            let urlOver = document.querySelector('img[data-over][data-test="test"]').dataset.over;
+                        </code>
+                        <hr />
+                        <p data-module="color">
+                            Lorem ipsum dolor sit amet, 
+                            consectetur adipisicing elit. 
+                            Sed, quidem! Quod sapiente consequatur 
+                            eius in officia ducimus nisi, totam quo 
+                            vitae voluptate, quasi rerum! Debitis 
+                            aliquid aliquam et suscipit ab!
+                        </p>
+                        <p data-module="color" data-color="#09f">
+                            Lorem ipsum dolor sit amet, 
+                            consectetur adipisicing elit. 
+                            Sed, quidem! Quod sapiente consequatur 
+                            eius in officia ducimus nisi, totam quo 
+                            vitae voluptate, quasi rerum! Debitis 
+                            aliquid aliquam et suscipit ab!
+                        </p>
+                        <p data-module="color" data-color="orange">
+                            Lorem ipsum dolor sit amet, 
+                            consectetur adipisicing elit. 
+                            Sed, quidem! Quod sapiente consequatur 
+                            eius in officia ducimus nisi, totam quo 
+                            vitae voluptate, quasi rerum! Debitis 
+                            aliquid aliquam et suscipit ab!
+                        </p>
+                        <p data-module="font" data-weight="bold">
+                            Lorem ipsum dolor sit amet, 
+                            consectetur adipisicing elit. 
+                            Sed, quidem! Quod sapiente consequatur 
+                            eius in officia ducimus nisi, totam quo 
+                            vitae voluptate, quasi rerum! Debitis 
+                            aliquid aliquam et suscipit ab!
+                        </p>
+                        <p data-module="magie">
+                            Lorem ipsum dolor sit amet, 
+                            consectetur adipisicing elit. 
+                            Sed, quidem! Quod sapiente consequatur 
+                            eius in officia ducimus nisi, totam quo 
+                            vitae voluptate, quasi rerum! Debitis 
+                            aliquid aliquam et suscipit ab!
+                        </p>
+                        <p data-module="after">
+                            Lorem ipsum dolor sit amet, 
+                            consectetur adipisicing elit. 
+                            Sed, quidem! Quod sapiente consequatur 
+                            eius in officia ducimus nisi, totam quo 
+                            vitae voluptate, quasi rerum! Debitis 
+                            aliquid aliquam et suscipit ab!
+                        </p>
+                    </p>
+                    <hr />
+
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
