@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+
+        /*
+        Promise = créer une fonction asynchrone dont l'éxécution de stoppe pas 
+        ou ne "fige" pas l'utilisation de la page.
+
+        Une promesse renvoie deux type de résultat :
+        Soit la réussite avec la fonction   resolve()
+        Soit l'échec avec la fonction       reject()
+        */
+
+        function getResource(){
+            let randTime = Math.floor( Math.random()*5000 + 1000 );
+            let randError = Math.floor( Math.random()*3 + 1 );
+
+            return new Promise( function(resolu, rejete){
+                setTimeout( function(){
+                    if(2 !== randError){
+                        resolu('Le formateur aime bien les jeux de rôles');
+                    }else{
+                        rejete( new Error('L\'information n\'est pas disponible'));
+                    }
+                }, randTime );
+            });
+        }
+
+        loaded(function(){
+            loadNav();
+            let loadingGif = `<img src="../images/loading.gif" /><br />
+            <b style="color: darkgreen">En attente d'une information</b>`;
+
+            s('#btn').addEventListener('click', function(){
+                s('#result').innerHTML = loadingGif;
+                this.setAttribute('disabled', 'disabled');
+                getResource()
+                .then( message => {
+                    s('#result').innerHTML = message;
+                })
+                .catch( error => {
+                    s('#result').innerHTML = `
+                    <b style="color:red;font-weight:bold">
+                        ${error}
+                    </b>`;
+                })
+                .finally( () => {
+                    this.removeAttribute('disabled');
+                });
+            });
+
+            s('#btnTest').addEventListener('click', function(){
+                console.log('Coucou');
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>Les promesses (promise)</h2>
+                </header>
+                <main>
+                    <p>
+                        <button class="btn btn-secondary" id="btn">
+                            Récupérer une information
+                        </button>
+                        <button class="btn btn-secondary" id="btnTest">
+                            Afficher coucou en console
+                        </button>
+                    </p>
+                    <p id="result">
+
+                    </p>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
