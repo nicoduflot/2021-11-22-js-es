@@ -25,3 +25,8 @@ h1, .h1{
 .right{
     transform: translateX( calc( 100vw/2 - 100px ) );
 }
+
+.blog-wrapper{
+    height: 300px;
+    overflow: auto;
+}
