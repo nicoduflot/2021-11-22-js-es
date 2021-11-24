@@ -87,6 +87,16 @@ sapiente facere ea labore voluptates?`;
                 }
             });
 
+            //preventDefault()
+            let btnFormSubmit = s('#testPreventDefault button[type="submit"]');
+            btnFormSubmit.addEventListener('click', function(event){
+                if('' === s('[name="nom"]').value || '' === s('[name="prenom"]').value){
+                    //console.log('preventDefault');
+                    //console.log(event);
+                    event.preventDefault();
+                }
+            });
+
         });
     </script>
 </head>
@@ -163,7 +173,7 @@ sapiente facere ea labore voluptates?`;
                         automatique de certaines actions, notemment les submit de formulaires, 
                         mais aussi le comprtement normal d'un lien.
                     </p>
-                    <form method="get" action="">
+                    <form id="testPreventDefault" method="get" action="">
                         <fieldset>
                             <legend>Civilité</legend>
                             <p>
