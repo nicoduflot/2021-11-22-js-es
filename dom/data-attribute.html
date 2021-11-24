@@ -97,6 +97,25 @@
                 s('#xy').innerHTML = `x : ${column} - y : ${line}`;
             });
             */
+
+            //puissance 4
+            //définir la première
+            let colorNow = 'bg-danger';
+            sAll('#p4 th').forEach(function(tableCol){
+                let coord = 0;
+                tableCol.addEventListener('click', function(){
+                    coord = this.dataset.col;
+                    for(let i = 6; i > 0; i--){
+                        let cell = s(`td[data-col="${coord}"][data-row="${i}"]`);
+                        if( !cell.classList.contains('bg-danger') && !cell.classList.contains('bg-primary') ){
+                            //ajout de couleur
+                            cell.classList.add(colorNow);
+                            colorNow = ('bg-danger' === colorNow)? 'bg-primary' : 'bg-danger';
+                            break;
+                        }
+                    }
+                });
+            });
         });
     </script>
 </head>
