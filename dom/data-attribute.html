@@ -14,6 +14,36 @@
             loadNav();
             let test = s('h2[data-title]');
             console.log(test.dataset.title);
+            sAll('p[data-module]').forEach(element => {
+                switch(element.dataset.module){
+                    case 'color':
+                        //code 
+                        let color = element.dataset.color || '#f00';
+                        element.addEventListener('mouseover', function(){
+                            this.style.color = color;
+                        });
+                        element.addEventListener('mouseout', function(){
+                            this.style.removeProperty('color');
+                        });
+                    break;
+                    case 'font' :
+                    case 'magie' :
+                        // code
+                        let weight = element.dataset.weight || 'lighter';
+                        element.addEventListener('mouseover', function(){
+                            this.style.fontWeight = weight;
+                        });
+                        element.addEventListener('mouseout', function(){
+                            this.style.removeProperty('font-weight');
+                        });
+                    break;
+                    case 'after':
+                    default :
+                        //code
+                }
+            });
+
+            //pointeur ligne colonne
         });
     </script>
 </head>
@@ -97,7 +127,43 @@
                         </p>
                     </p>
                     <hr />
-
+                    <table>
+                        <tr>
+                            <td data-column="0" data-line="0">0 - 0</td>
+                            <td data-column="1" data-line="0">1 - 0</td>
+                            <td data-column="2" data-line="0">2 - 0</td>
+                            <td data-column="3" data-line="0">3 - 0</td>
+                            <td data-column="4" data-line="0">4 - 0</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="1">0 - 1</td>
+                            <td data-column="1" data-line="1">1 - 1</td>
+                            <td data-column="2" data-line="1">2 - 1</td>
+                            <td data-column="3" data-line="1">3 - 1</td>
+                            <td data-column="4" data-line="1">4 - 1</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="2">0 - 2</td>
+                            <td data-column="1" data-line="2">1 - 2</td>
+                            <td data-column="2" data-line="2">2 - 2</td>
+                            <td data-column="3" data-line="2">3 - 2</td>
+                            <td data-column="4" data-line="2">4 - 2</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="3">0 - 3</td>
+                            <td data-column="1" data-line="3">1 - 3</td>
+                            <td data-column="2" data-line="3">2 - 3</td>
+                            <td data-column="3" data-line="3">3 - 3</td>
+                            <td data-column="4" data-line="3">4 - 3</td>
+                        </tr>
+                        <tr>
+                            <td data-column="0" data-line="4">0 - 4</td>
+                            <td data-column="1" data-line="4">1 - 4</td>
+                            <td data-column="2" data-line="4">2 - 4</td>
+                            <td data-column="3" data-line="4">3 - 4</td>
+                            <td data-column="4" data-line="4">4 - 4</td>
+                        </tr>
+                    </table>
                 </main>
             </article>
         </section>
