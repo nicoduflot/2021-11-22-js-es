@@ -77,3 +77,66 @@ function getXhr(){
     }
     return xhr; //on renvoie le résultat de la fonction
 }
+
+function jsonUsersToTable(data){
+    //console.log(data);
+    let html = '';
+    for(let user of data){
+        //console.log(user);
+        html += `
+        <tr data-id="${user.id}" data-name="${user.name}" data-email="${user.email}">
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+        </tr>
+        `
+    }
+    return html;
+}
+
+function jsonUsersToTableObject(data){
+    console.log(data);
+    let tHeadContent = '';
+    let tbodyContent = '';
+    let isItFirstRound = true;
+    tHeadContent += '<tr>';
+    // on parcour les éléments du JSON
+    for(let user of data){
+        //ici, chaque élément est un objet user
+        tbodyContent += `<tr data-id="${user.id}" data-name="${user.name}" data-email="${user.email}">`;
+        // on parcour les propriétés de l'objet user
+        for(key in user){
+            //on vérfie que chaque propriété trouvée est une propriété directe
+            if(user.hasOwnProperty(key)){
+                // si c'est le premier user, on crée la ligne d'entête du tableau,
+                // en récupérant les clefs des propriétés 
+                if(isItFirstRound){
+                    tHeadContent += `<th>${key}</th>`
+                }
+                // si la propriété ne contient un objet (deuxième niveau),
+                // on l'inckus directement dans une cellule
+                if('object' !== typeof user[key]){
+                    tbodyContent += `<td>${user[key]}</td>`;    
+                }else{
+                    // si la propriété contient un objet (deuxième niveau)
+                    tbodyContent += `<td>`;//${user[key]}</td>
+                    for(item in user[key]){
+                        if(user[key].hasOwnProperty(item)){
+                            // on ajoute les détails de l'objet dans la cellule (nom de la propriété et sa valeur)
+                            // si elle ne contient pas d'objet
+                            if('object' !== typeof user[key][item]){
+                                tbodyContent += `${item} : ${user[key][item]}<br />`;
+                            }
+                            //si c'est un objet, on ne l'ajoute pas (troisième niveau non affiché)
+                        }
+                    }
+                    tbodyContent += `</td>`;//${user[key]}</td>
+                }
+            }
+        }
+        tbodyContent += `</tr>`;
+        isItFirstRound = false;
+    }
+    tHeadContent += '</tr>';
+    return [tHeadContent, tbodyContent];
+}
