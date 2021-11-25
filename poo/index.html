@@ -216,6 +216,20 @@
             console.log(`monAmbulance instanceof Object : ${monAmbulance instanceof Object}`);
             console.log(`monAmbulance instanceof Humain : ${monAmbulance instanceof Humain}`);
             
+            console.log(Math);
+            console.log(Math.constructor);
+
+            let Test = {
+                PI: 3.1416,
+                round: function(valeur){
+                    return Math.round(valeur)
+                }
+            }
+
+            console.log(Test);
+            console.log(Test.round(Test.PI));
+
+
         });
     </script>
 </head>

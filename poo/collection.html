@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+        loaded(function () {
+            loadNav();
+            // Collections : dictionnaires (tableaux associatifs) => créés par la classe Map()
+            
+            let map = new Map();
+            console.log(map);
+            map.set('lastName', 'Doe');
+            map.set('firstName', 'Jane')
+                .set('email', 'jane.doe@missing.com')
+                .set('phone', '0123456789')
+                .set('detail', 'none');
+            
+            console.log(map);
+            console.log(map.size);
+
+            map.delete('detail');
+            console.log(map);
+            if(map.has('phone')){
+                console.log(`Le tel de ${map.get('firstName')} ${map.get('lastName')} est ${map.get('phone')}`);
+            }else{
+                console.log(`Le tel de ${map.get('firstName')} ${map.get('lastName')} est inconnu`);
+            }
+
+            //map.clear();
+            console.log(map);
+            //  .entries()  => un for of des clefs et des valeurs de la collection
+            //  .keys()     => un for of des clefs de la collection
+
+            // Map() implémente déjà un "design pattern" nomé Iterator
+            // Un itérator permet de parcourir les données de l'objet comme 
+            // s'il s'agissait d'un tableau
+            // Iterator => Itérable => structure d'itération (for / while .forEach() / etc)
+            for( let [key, value] of map.entries()){
+                console.log(` ${key.toUpperCase().padEnd(12, ' ')} = ${value.padStart(24, ' ')} `);
+            }
+
+            for( let key of map.keys()){
+                console.log(` ${key.toUpperCase().padEnd(12, ' ')} = ${'****'.padStart(24, ' ')} `);
+            }
+
+            for( let value of map.values()){
+                console.log(` ${'***'.padEnd(12, ' ')} = ${value.padStart(24, ' ')} `);
+            }
+
+            map.set('phone', '9876543210');
+
+            console.log(map);
+
+            // collection d'objet, type tableau à valeur unique
+            // class Set()
+
+            let set = new Set();
+            console.log(set);
+
+            set.add('Jon').add('Aria').add('Sansa').add('Rob').add('Joffrey').add('Sansa').add('Hodor')
+            .add('Brandon').add('Oona');
+
+            console.log(set);
+
+            for( let [key, value] of set.entries()){
+                console.log(` ${key.toUpperCase().padEnd(8, ' ')} = ${value.padStart(8, ' ')} `);
+            }
+
+            for( let key of set.keys()){
+                console.log(` ${key.toUpperCase().padEnd(8, ' ')} = ${'****'.padStart(8, ' ')} `);
+            }
+
+            for( let value of set.values()){
+                console.log(` ${'***'.padEnd(8, ' ')} = ${value.padStart(8, ' ')} `);
+            }
+
+            set.delete('Joffrey');
+            console.log(set);
+
+            if(!set.has('Joffrey')){
+                console.log('Youpi !');
+            }
+
+            //set.clear();
+
+            // Factory : usine de création d'objet
+            // sans passer par une classe "normale" 
+            // possèdeant un constructeur
+
+            class UserFactory{
+                // constructor(){ /* code constructeur */} // pour une classe
+                static createUser(firstName, lastName, email, phone, city, country){
+                    let info = {
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        phone: phone
+                    };
+                    let address = {
+                        city: city,
+                        country: country
+                    };
+                    let user = {
+                        login: email
+                    }
+
+                    //es6
+                    Object.assign(user, info, address);
+
+                    return user;
+                }
+
+                static test(unNombre){
+                    if(parseFloat(unNombre)){
+                        let reste = parseFloat(unNombre) % 2;
+                        return (reste !== 0)?'impair': 'pair';
+                    }else{
+                        return false;
+                    }
+                }
+            }
+
+            let nDuflot = UserFactory.createUser('Nicolas', 'Duflot', 'nduflot@dawan.fr', '0123456789', 'Lille', 'France');
+            let aStarck = UserFactory.createUser('Aria', 'Starck', 'aStarck@killemall.tk', '9876543210', 'Le Nord', 'Westeros');
+
+            console.log(`user nDuflot:`, nDuflot);
+            console.log(`user nDuflot.login:`, nDuflot.login);
+            console.log(`user nDuflot.email:`, nDuflot.email);
+            console.log(`user nDuflot.phone:`, nDuflot.phone);
+
+            console.log(`user nDuflot:`, aStarck);
+            console.log(`user nDuflot.login:`, aStarck.login);
+            console.log(`user nDuflot.email:`, aStarck.email);
+            console.log(`user nDuflot.phone:`, aStarck.phone);
+
+            console.log(UserFactory.test(13));
+
+        });
+    </script>
+</head>
+
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>POO : Les collections</h2>
+                </header>
+                <main>
+                    <p>
+                        Les collecitons sont des structure - objets - proches des tableaux 
+                        mais qu'on manipule comme des objets
+                    </p>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
