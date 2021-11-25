@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Javascript</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script>
+        loaded(function () {
+            loadNav();
+            // Création d'un objet depuis un prototype
+            // Création du constructeur de l'objet
+            function Humain(nom, prenom, age){
+                this.nom = nom;
+                this.prenom = prenom;
+                this.age = age;
+                this.esperanceDeVie = parseInt(this.age) + Math.floor( Math.random()*20 );
+            }
+
+            // Mon humain sait faire des choses, 
+            // il connaît son nom
+            Humain.prototype.monNom = function(){
+                return `${prenom} !`;
+            };
+
+            // tous les humains savent crier
+            Humain.prototype.crier = function(cri = ''){
+                return `${cri} RRRRRR !`;
+            };
+
+            //test de création de mon 1er humain
+            let premierHumain = new Humain('Doe', 'Naoh', 20);
+
+            console.log(premierHumain);
+            console.log(premierHumain.crier());
+            console.log(premierHumain.crier('CROM !'));
+            console.log(premierHumain instanceof Humain);
+            console.log(premierHumain instanceof Object);
+
+            let monBarbare = new Humain('LeBarbare', 'Conane', '15');
+            console.log(monBarbare);
+            console.log(monBarbare.crier());
+            console.log(monBarbare.crier('CROM !'));
+            console.log(monBarbare instanceof Humain);
+            console.log(monBarbare instanceof Object);
+
+            // JSON : JavaScript Object Notation
+            // on peut utiliser la syntaxe JSon pour créer un objet
+            // la clef des propriétés, au contraire d'un objet litéral,
+            // est écrite en chaîne de caractère
+
+            let objJson = {
+                'nom': 'Sno',
+                'prenom': 'Jon',
+                'Age': 18,
+                'gimmick': function(){
+                    return `Hello this is ${this.prenom} ${this.nom} welcome to Jackass !`;
+                }
+            };
+
+            console.log(objJson);
+            console.log(objJson instanceof Humain);
+            console.log(objJson instanceof Object);
+            console.log(objJson.gimmick());
+
+            let u = 'bla bla bla';
+
+            //objet litéral es6
+            let es6Object = {
+                u, // semblable à u: u,
+                foo: 'bar',
+                bar: 13.5,
+                help(){
+                    return 'I need somebody ! Anybody !';
+                }
+            }
+
+            console.log(es6Object);
+            console.log(es6Object.u);
+            console.log(es6Object.help());
+
+            // les classes en JS.
+            
+        });
+    </script>
+</head>
+
+<body>
+    <header class="bg-light">
+        <h1>Formation Javascript</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    </nav>
+    <main class="container">
+        <section class="row">
+            <article class="col-lg-12">
+                <header>
+                    <h2>POO : Programmation Orientée Objet</h2>
+                </header>
+                <main>
+                    <p>
+                        Tout se passe dans le code
+                    </p>
+                </main>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-light">
+        &copy; Dawan 2021-11
+    </footer>
+</body>
+
+</html>
