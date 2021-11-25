@@ -35,6 +35,19 @@
             });
         }
 
+        function resolveAfter7SecondsBis(){
+            let randError = Math.floor( Math.random()*3 + 1 );
+            setTimeout( function(){
+                if(2 !== randError){
+                    return 'Le formateur aime bien les jeux de rôles';
+                }else{
+                    return new Error('L\'information n\'est pas disponible');
+                }
+            }, 7000 );
+        }
+
+        console.log(resolveAfter7SecondsBis());
+
         // fonction qui attend 7 secondes avant de renvoyer un résultat
         function resolveAfter7Seconds(){
             let randError = Math.floor( Math.random()*3 + 1 );
@@ -55,6 +68,7 @@
             return result;
         }
 
+        
         asyncCall()
         .then( message => {
             console.log(`async : ${message}`);
@@ -65,7 +79,7 @@
         .finally( () => {
             console.log(`async : fin de la fonction asynchrone`);
         });
-
+        
         console.log('on va charger le HTML');
 
         loaded(function(){
