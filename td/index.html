@@ -88,6 +88,7 @@
             return html;
         }
 
+        
         function fetchContent(url, typeContent, idPost = null) {
             let content = '';
             fetch(url)
@@ -99,14 +100,35 @@
                         s('#result').innerHTML = content;
                         break;
                     case ('comments'):
-                        console.log('post / comments', idPost);
                         content = afficheComments(jsonContent, idPost);
                         s('#comments').innerHTML = content;
                         break;
                 }
-            })
+            });
         }
 
+        /*
+        function fetchData(url, typeContent){
+            fetch(url)
+            .then(response => response.json())
+            .then(jsonContent => {
+                //console.log('Fetch', jsonContent);
+                return jsonContent;
+            });
+        }
+
+        let contentPostJson = null;
+        let contentCommentsJson = null;
+
+        async function getContent(url, typeContent){
+            content = await fetchData(url, typeContent);
+
+            return content;
+        }
+
+        contentPostJson = getContent(posts, 'post');
+        contentCommentsJson = getContent(comments, 'comments');
+        */
         loaded(function () {
             loadNav();
 
