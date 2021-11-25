@@ -13,6 +13,7 @@
     <script>
         loaded(function () {
             loadNav();
+
             // Création d'un objet depuis un prototype
             // Création du constructeur de l'objet
             function Humain(nom, prenom, age){
@@ -29,7 +30,10 @@
             };
 
             // tous les humains savent crier
-            Humain.prototype.crier = function(cri = ''){
+            // si on ne préceise pas que la méthode
+            // est prototypée, on créer l'équivalent
+            // d'une fonction statique
+            Humain.crier = function(cri = ''){
                 return `${cri} RRRRRR !`;
             };
 
@@ -37,15 +41,15 @@
             let premierHumain = new Humain('Doe', 'Naoh', 20);
 
             console.log(premierHumain);
-            console.log(premierHumain.crier());
-            console.log(premierHumain.crier('CROM !'));
+            console.log(Humain.crier());
+            console.log(Humain.crier('CROM !'));
             console.log(premierHumain instanceof Humain);
             console.log(premierHumain instanceof Object);
 
             let monBarbare = new Humain('LeBarbare', 'Conane', '15');
             console.log(monBarbare);
-            console.log(monBarbare.crier());
-            console.log(monBarbare.crier('CROM !'));
+            console.log(Humain.crier());
+            console.log(Humain.crier('CROM !'));
             console.log(monBarbare instanceof Humain);
             console.log(monBarbare instanceof Object);
 
@@ -85,6 +89,132 @@
             console.log(es6Object.help());
 
             // les classes en JS.
+            /*
+            Les classes sont apparues en es6
+            
+            Contrairement aux langage plus robustes (C++, Java... )
+            on ne déclare pas d'e 'attributs privés
+
+            par convention, ce qui doit être utilisé comme un attribut privé
+            sera préfixé dpar un _
+            */
+
+            // créer une class permet de "regrouper" la définition d'un Objet
+
+            class Voiture{
+                // il faut déclarer le constructeur de la classe :
+                // c'est l'appel qui permettra de créer des instance objet de la classe
+                constructor(marque, modele, couleur){
+                    this._marque = marque;  // pour proprement accéder à _maruqe, 
+                                            // vais devoir utiliser des méthodes 
+                                            // getter ou setter de la classe
+                    this.modele = modele;   // attribut public directement accessile par instance.modele
+                    this.couleur = couleur; // attribut public directement accessile par instance.couleur
+                }
+
+                // pour récupérer une valeur définie comme privée, il faut 
+                // donc utiliser un getter => une méthode qui renvoi la valeur d'un attribut
+                // pour modifier un attribut privée, il faut utliser un setter =>  qui modifie la valeur d'un attribut
+                // getter pour _marque
+                get getMarque(){
+                    return this._marque;
+                }
+
+                set setMarque(marque){
+                    this._marque = marque;
+                }
+
+                // les méthodes de Voiture
+                // <=> Voiture.prototype.demarrer() = function(){/* code méthode */};
+                demarrer(){
+                    return `la ${this.constructor.name} démarre`;
+                }
+
+                // <=> Voiture.prototype.avancer = function(){ /* code méthode */};
+                avancer(){
+                    return `la ${this.constructor.name} avance`;
+                }
+
+                // à la création du constructeur, une constante this.constructor.name
+                // est créée, elle contient le nom de la classe
+                showConstructor(){
+                    return this.constructor;
+                }
+
+                // méthode statique
+                /*
+                Appartient à la classe, et est 
+                partagée entre toute les instances 
+                d'une classe identique.
+                cela veut dire qu'elle n'est utilisable que via
+                l'appel direct de la classe
+                */
+
+                // <=> Voiture.klaxonner = function(){ /* code méthode statique */ };
+                // en code : Voiture.klaxonner();
+                static klaxonner(){
+                    return 'POUET ! POUET !';
+                }
+            }
+
+            class Ambulance extends Voiture{
+                // il faut un constructeur à cette classe étendue
+                // il doit être semblable à la classe mère
+                // <=> ?
+                constructor(marque, modele, couleur){
+                    super(marque, modele, couleur);
+                    this.sirene = false;
+                }
+
+                // on peut surcharger ou redéfinir une méthode
+                // de cette façon la méthode de la classe fille
+                // corresponds plus au comportement d'une ambulance
+                // <=> Ambulance.prototype.demarrer()
+                demarrer(){
+                    let bruit = '';
+                    bruit = (this.sirene)? 'PIN ! PON !' : 'vrrrrrrrrr';
+                    //return bruit; // soit juste le bruit
+                    return `${super.demarrer()} ${bruit}`;
+                }
+
+                // on peut rédéfinir les méthodes statiques
+                static klaxonner(){
+                    return `POUUUUUUUUUUET ! POUUUUUUUUUUET !`;
+                }
+            }
+
+            let maVoiture = new Voiture('Renault', 'Twingo', 'Vert poubelle');
+            console.log(maVoiture.showConstructor());
+            console.log(maVoiture.getMarque);
+            console.log(maVoiture.modele);
+            console.log(maVoiture.couleur);
+            maVoiture.setMarque = 'Peugeot';
+            maVoiture.modele = '205';
+            maVoiture.couleur = 'rouge';
+            console.log(Voiture.klaxonner());
+
+            // exemple d'autre méthode statiques "natives" dans JS
+            console.log(`Math.pow(2,3) : ${Math.pow(2,3)}`);
+            let dateNow = new Date();
+            console.log(`let dateNow = new Date() : ${dateNow}`);
+            console.log(`Date.now() : ${Date.now()}`);
+
+            let monAmbulance = new Ambulance('Peugeot', 'Partner', 'Blanche');
+            console.log(monAmbulance);
+            console.log(monAmbulance.demarrer());
+            monAmbulance.sirene = true;
+            console.log(monAmbulance.demarrer());
+            console.log(Ambulance.klaxonner());
+
+            console.log(`maVoiture instanceof Voiture : ${maVoiture instanceof Voiture}`);
+            console.log(`maVoiture instanceof Ambulance : ${maVoiture instanceof Ambulance}`);
+            console.log(`maVoiture instanceof Object : ${maVoiture instanceof Object}`);
+            console.log(`maVoiture instanceof Humain : ${maVoiture instanceof Humain}`);
+
+            console.log(`monAmbulance instanceof Voiture : ${monAmbulance instanceof Voiture}`);
+            console.log(`monAmbulance instanceof Ambulance : ${monAmbulance instanceof Ambulance}`);
+            console.log(`monAmbulance instanceof Object : ${monAmbulance instanceof Object}`);
+            console.log(`monAmbulance instanceof Humain : ${monAmbulance instanceof Humain}`);
             
         });
     </script>
