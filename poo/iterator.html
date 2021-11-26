@@ -14,7 +14,145 @@
         loaded(function () {
             loadNav();
             
+            // itérator permet de créer des objets de type collections => ArrayCollection
+            let arrayCollection = {
+                //un itérator doit avoir comme attribut au moins un tableau
+                values: [],
+                stupide: 'buh',
+                add(...valeurs){
+                    for(let i = 0; i < valeurs.length; i++ ){
+                        this.values.push(valeurs[i]);
+                    }
+                    return this;
+                },
+                count(search){
+                    let cpt = 0;
+                    for(value of this.values){
+                        cpt += (value === search)? 1:0;
+                    }
+                    return cpt;
+                },
+                // il faut maintenant déclarer l'objet comme itérable
+                // et en faisant cela, on définit quel attribut
+                // sera l'attribut itérable quand on appelle l'objet
+                // on va utilser le mot-clef Symbol (es6) => permet de créer des attributs ou des méthodes uniques
+                [Symbol.iterator](){
+                    let index = 0;
+                    let values = this.values;
+                    return{ // renvoi l'éxécution de la méthode next()
+                        next(){ // next est un générator, il renverra l'un après l'autre
+                                // ce qu'il recevra, il attends des propriétés, value et done.
+                                // value représente la valeur actuelle sur laquelle il itère
+                                // done est un booléen, si faux, il refait ce que next() contient
+                                //                      si vrai, next() s'arrête
+                            return {
+                                value: values[index++],
+                                done: values.length < index
+                            };
+                        }
+                    }; 
+                }
+            };
 
+            console.log(arrayCollection);
+            arrayCollection.add('yipi');
+            arrayCollection.add('yipi');
+            arrayCollection.add('yipi');
+            arrayCollection.add('kaï');
+            arrayCollection.add('yeah');
+            arrayCollection.add('MF !');
+            console.log(arrayCollection);
+
+            for(let value of arrayCollection.values){
+                console.log(value);
+            }
+
+            for(let value of arrayCollection){
+                console.log(value);
+            }
+
+            class MonIterator{
+                //un itérator doit avoir comme attribut au moins un tableau
+                constructor(){
+                    this.values = [];
+                    this.stupide = 'buh';
+                }
+
+                add(...valeurs){
+                    for(let i = 0; i < valeurs.length; i++ ){
+                        this.values.push(valeurs[i]);
+                    }
+                    return this;
+                }
+
+                count(search){
+                    let cpt = 0;
+                    for(value of this.values){
+                        cpt += (value === search)? 1:0;
+                    }
+                    return cpt;
+                }
+
+                // il faut maintenant déclarer l'objet comme itérable
+                // et en faisant cela, on définit quel attribut
+                // sera l'attribut itérable quand on appelle l'objet
+                // on va utilser le mot-clef Symbol (es6) => permet de créer des attributs ou des méthodes uniques
+                [Symbol.iterator](){
+                    let index = 0;
+                    let values = this.values;
+                    return{ // renvoi l'éxécution de la méthode next()
+                        next(){ // next est un générator, il renverra l'un après l'autre
+                                // ce qu'il recevra, il attends des propriétés, value et done.
+                                // value représente la valeur actuelle sur laquelle il itère
+                                // done est un booléen, si faux, il refait ce que next() contient
+                                //                      si vrai, next() s'arrête
+                            return {
+                                value: values[index++],
+                                done: values.length < index
+                            };
+                        }
+                    }; 
+                }
+            }
+
+            let monIterator = new MonIterator();
+
+            console.log(monIterator);
+            monIterator.add('yipi');
+            monIterator.add('yipi');
+            monIterator.add('yipi');
+            monIterator.add('kaï', 'yeah', 'MF !');
+            console.log(monIterator);
+
+            for(let value of monIterator.values){
+                console.log(value);
+            }
+
+            for(let value of monIterator){
+                console.log(value);
+            }
+
+            // Generator = fonction
+            // ce type de fonction retourne plusieurs valeurs.
+            // si on utilise return, lui ne retourn qu'une seule fois un résultat.
+            // si je veux un emsemble de résultat (une "récolte"), 
+            // on utilisera le mot-clef "yield" (rendre / récolter)
+            // pour spécifier qu'une fonction est generator,
+            // il faut utliser le caractère spécial * à la fin du mot function
+            // lors de la déclaration
+            function* valeurPaire(min, max){
+                for(let i = min; i <= max; i++){
+                    if( 0 === (i % 2) ){
+                        //return i;
+                        yield i;
+                    }
+                }
+            }
+
+            console.log(valeurPaire(0, 10));
+            for(let value of valeurPaire(0, 10)){
+                console.log(value);
+            }
 
         });
     </script>
