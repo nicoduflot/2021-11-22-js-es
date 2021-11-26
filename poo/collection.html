@@ -90,19 +90,39 @@
             }
 
             //set.clear();
-
             // Factory : usine de création d'objet
             // sans passer par une classe "normale" 
             // possèdeant un constructeur
+            class Employee{
+                constructor(name){
+                    this.name = name;
+                    this.role = 'Employee';
+                }
+            }
+
+            class Manager extends Employee{
+                constructor(name){
+                    super(name);
+                    this.role = 'Manager';
+                }
+            }
+
+            class HumanRessource extends Employee{
+                constructor(name){
+                    super(name);
+                    this.role = 'HR';
+                }
+            }
 
             class UserFactory{
                 // constructor(){ /* code constructeur */} // pour une classe
-                static createUser(firstName, lastName, email, phone, city, country){
+                static createUser(firstName, lastName, email, phone, city, country, role){
                     let info = {
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
-                        phone: phone
+                        phone: phone,
+                        role:role
                     };
                     let address = {
                         city: city,
@@ -111,9 +131,20 @@
                     let user = {
                         login: email
                     }
+                    let response = null;
+                    switch(role){
+                        case 'Manager':
+                        response = new Manager(lastName);
+                        break;
+                        case 'HumanRessource':
+                        response = new HumanRessource(lastName);
+                        break;
+                        default:
+                        response = new Employee(lastName);
+                    }
 
                     //es6
-                    Object.assign(user, info, address);
+                    Object.assign(user, info, address, response);
 
                     return user;
                 }
@@ -128,8 +159,8 @@
                 }
             }
 
-            let nDuflot = UserFactory.createUser('Nicolas', 'Duflot', 'nduflot@dawan.fr', '0123456789', 'Lille', 'France');
-            let aStarck = UserFactory.createUser('Aria', 'Starck', 'aStarck@killemall.tk', '9876543210', 'Le Nord', 'Westeros');
+    let nDuflot = UserFactory.createUser('Nicolas', 'Duflot', 'nduflot@dawan.fr', '0123456789', 'Lille', 'France', 'Manager');
+    let aStarck = UserFactory.createUser('Aria', 'Starck', 'aStarck@killemall.tk', '9876543210', 'Le Nord', 'Westeros', 'HumanRessource');
 
             console.log(`user nDuflot:`, nDuflot);
             console.log(`user nDuflot.login:`, nDuflot.login);
