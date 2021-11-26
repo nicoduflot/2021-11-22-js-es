@@ -1,8 +1,9 @@
-import {s, sAll, cE, setCookie, getCookie, getXhr} from '../Utils.js';
+import {loaded, loadNav, s, sAll, cE, setCookie, getCookie, getXhr} from '../Utils.js';
 import Aventurier from './Aventurier.js';
 import {Voleur} from './Voleur.js';
 import {Mage} from './Mage.js';
 import {Guerrier} from './Guerrier.js';
+import * as Creation from './MiseEnPlace.js';
 
 // test création aventurier
 
@@ -47,3 +48,52 @@ monGuerrier.changerArme('Hache de guerre');
 
 console.log(ennemi.attaquer(monGuerrier))
 console.log(monGuerrier.multi(ennemi));
+
+loaded(function(){
+    loadNav();
+
+    s('#createP').addEventListener('click', function(){
+        let nom = s('#nomP');
+        let prenom = s('#prenomP');
+        let classe = s('#classeP');
+        let content = '';
+        let personnage = Creation.createP(prenom.value, nom.value, classe.value);
+        if(!personnage){
+            content = `
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<strong>Attention</strong> Votre personnage n'est pas complet
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+            `;
+        }else{
+            content = Creation.fichePerso(personnage);                        
+        }
+        
+        let divResult = s('#fichePerso');
+        //console.log(divResult);
+        divResult.innerHTML = content;
+    });
+
+    //createE
+    s('#createE').addEventListener('click', function(){
+        let nom = s('#nomE');
+        let prenom = s('#prenomE');
+        let classe = Creation.randClasse();
+        let content = '';
+        let personnage = Creation.createP(prenom.value, nom.value, classe);
+        if(!personnage){
+            content = `
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<strong>Attention</strong> Votre ennemi n'est pas complet
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+            `;
+        }else{
+            content = Creation.fichePerso(personnage);                        
+        }
+        //console.log(content);
+        let divResult = s('#ficheE');
+        //console.log(divResult);
+        divResult.innerHTML = content;
+    });
+});

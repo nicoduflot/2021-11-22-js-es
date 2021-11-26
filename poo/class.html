@@ -11,7 +11,7 @@
     <script src="../js/bootstrap.bundle.js"></script>
     <script type="module" src="../class/Aventure/Aventure.js"></script>
     <script>
-        
+
     </script>
 </head>
 
@@ -24,13 +24,68 @@
     </nav>
     <main class="container">
         <section class="row">
-            <article class="col-lg-12">
+            <article class="col-lg-6">
                 <header>
-                    <h2>POO : Programmation Orientée Objet</h2>
+                    <h2>POO : Personnages</h2>
                 </header>
-                <main>
+                <main id="personnage">
                     <p>
-                        Tout se passe dans le code
+                        <label class="form-label">
+                            Prénom
+                        </label>
+                        <input type="text" id="prenomP" class="form-control" />
+                    </p>
+                    <p>
+                        <label class="form-label">
+                            Nom
+                        </label>
+                        <input type="text" id="nomP" class="form-control" />
+                    </p>
+                    <p>
+                        <label class="form-label">
+                            Choix de la classe :
+                        </label>
+                        <select id="classeP" class="form-select" aria-label="Default select example">
+                            <option selected value="Aventurier">Aventurier</option>
+                            <option value="Voleur">Voleur</option>
+                            <option value="Guerrier">Guerrier</option>
+                            <option value="Mage">Mage</option>
+                        </select>
+                    </p>
+                    <p>
+                        <button class="btn btn-secondary" id="createP">
+                            Créer le personnage
+                        </button>
+                    </p>
+                    <div id="fichePerso">
+
+                    </div>
+                </main>
+            </article>
+            <article class="col-lg-6">
+                <header>
+                    <h2>POO : Ennemi</h2>
+                </header>
+                <main id="ennemi">
+                    <p>
+                        <label class="form-label">
+                            Prénom
+                        </label>
+                        <input type="text" id="prenomE" class="form-control" />
+                    </p>
+                    <p>
+                        <label class="form-label">
+                            Nom
+                        </label>
+                        <input type="text" id="nomE" class="form-control" />
+                    </p>
+                    <p>
+                        <button class="btn btn-secondary" id="createE">
+                            Générer l'ennemi aléatoirement
+                        </button>
+                    </p>
+                    <p id="ficheE">
+
                     </p>
                 </main>
             </article>
