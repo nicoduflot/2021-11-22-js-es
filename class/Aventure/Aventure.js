@@ -49,6 +49,8 @@ monGuerrier.changerArme('Hache de guerre');
 console.log(ennemi.attaquer(monGuerrier))
 console.log(monGuerrier.multi(ennemi));
 
+var persoValide = null;
+
 loaded(function(){
     loadNav();
 
@@ -66,7 +68,9 @@ loaded(function(){
 </div>
             `;
         }else{
-            content = Creation.fichePerso(personnage);                        
+            content = Creation.fichePerso(personnage);    
+            persoValide = personnage;     
+            console.log(persoValide);               
         }
         
         let divResult = s('#fichePerso');
@@ -89,7 +93,10 @@ loaded(function(){
 </div>
             `;
         }else{
-            content = Creation.fichePerso(personnage);                        
+            content = Creation.fichePerso(personnage);
+            persoValide = personnage;
+            console.log(persoValide);
+            console.log(`test.php?nom=${persoValide.nom}&prenom=${persoValide.prenom}`);
         }
         //console.log(content);
         let divResult = s('#ficheE');
